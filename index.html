@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Denta - Modern Dental Care for a Perfect Smile">
+    <meta name="description" content="From preventive care to complex restorations, Denta offers advanced dental technologies for your perfect smile.">
+    <meta name="keywords" content="Dentistry, Dental Implants, Preventive Care, Smile, Health Check">
+    <title>Denta - Modern Dental Care for a Perfect Smile</title>
+    <link rel="icon" href="tooth-icon-minimal.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #E65825;
+            --secondary: #FF6F3C;
+            --background: #1A1A1A;
+            --card-background: #2A2A2A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #E0E0E0;
+            --highlight: #FFD580;
+            --gradient: linear-gradient(to right, #FF6F3C, #A12D12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        @keyframes subtleGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px var(--highlight)); }
+            50% { filter: drop-shadow(0 0 15px var(--highlight)); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- Header --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .header.scrolled {
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: none; /* Hidden on mobile */
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .cta-button {
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(255, 111, 60, 0.5);
+        }
+
+        .cta-button:hover {
+            background: var(--primary);
+            color: var(--text-primary);
+            box-shadow: 0 0 15px var(--secondary);
+            animation: pulse 1s infinite;
+        }
+
+        .hamburger-menu {
+            display: block; /* Shown on mobile */
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-primary);
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: var(--gradient);
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1;
+        }
+
+        .hero-headline {
+            font-size: 2.5rem;
+            font-weight: bold;
+            line-height: 1.2;
+            color: var(--text-primary);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subheadline {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            animation: fadeIn 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .hero-visual {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 300px;
+            animation: subtleGlow 4s infinite ease-in-out;
+        }
+        
+        .hero-visual-inner {
+            animation: rotate 20s linear infinite;
+        }
+
+        .hero-location-time {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            padding: 0 1rem;
+        }
+
+        /* --- Team Showcase Section --- */
+        .team-showcase {
+            padding: 6rem 0;
+            background-color: var(--background);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+        }
+
+        .team-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .team-card {
+            background-color: var(--card-background);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .team-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .team-card-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .team-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--card-background);
+            background-color: var(--background);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Styles */
+        @media (min-width: 640px) { /* Tablet */
+            .hero-headline { font-size: 3rem; text-align: left; }
+            .hero-subheadline { font-size: 1.125rem; text-align: left; }
+            .hero-content { align-items: flex-start; }
+            .hero-visual {
+                left: 70%;
+                max-width: 400px;
+            }
+            .hero-location-time {
+                left: 1rem;
+                transform: none;
+                justify-content: flex-start;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                display: flex;
+            }
+            .hamburger-menu {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) { /* Desktop */
+            .hero-headline { font-size: 4rem; }
+            .team-cards {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .footer-links {
+                display: flex;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo">Pseudo </a>
+            <nav class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#implants">Products</a>
+                <a href="#pricing">Contacts</a>
+            </nav>
+            <a href="#" class="cta-button">Request</a>
+            <div class="hamburger-menu" aria-label="Toggle navigation menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-headline">
+                Modern Care for a Perfect Smile
+            </h1>
+            <p class="hero-subheadline">
+                From preventive care to complex restorations, a comprehensive approach to your dental health.
+            </p>
+        </div>
+        <div class="hero-location-time">
+            <span>Best Dentistry 2025</span>
+            <span id="location-time">Barcelona, Spain | 17:37:03 GMT+1</span>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <span>&copy; 2025 Denta.</span>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll behavior
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger-menu');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Update real-time clock
+        function updateTime() {
+            const timeSpan = document.getElementById('location-time');
+            const now = new Date();
+            const gmtPlus1Time = new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 3600000); // 3600000 ms = 1 hour
+            const timeString = gmtPlus1Time.toLocaleTimeString('en-GB', { hour12: false });
+            timeSpan.textContent = `Barcelona, Spain | ${timeString} GMT+1`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call
+    </script>
+</body>
+</html>
